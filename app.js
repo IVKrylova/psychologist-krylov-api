@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const { PORT = 3000, MONGODB_URL, NODE_ENV } = process.env;
 const MONGODB_URL_DEV = require('./utils/constants');
@@ -14,6 +15,13 @@ app.use(helmet());
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+// подключаем логгер запросов
+app.use(requestLogger);
+
+
+// подключаем логгер ошибок
+app.use(errorLogger);
 
 async function main() {
   await mongoose.connect(NODE_ENV === 'production' ? MONGODB_URL : MONGODB_URL_DEV);
