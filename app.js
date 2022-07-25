@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
+const limiter = require('./utils/limiter');
 
 const { PORT = 3000, MONGODB_URL, NODE_ENV } = process.env;
 const MONGODB_URL_DEV = require('./utils/constants');
@@ -19,6 +20,8 @@ app.use(bodyParser.json());
 // подключаем логгер запросов
 app.use(requestLogger);
 
+// лимит запросов
+app.use(limiter);
 
 // подключаем логгер ошибок
 app.use(errorLogger);
