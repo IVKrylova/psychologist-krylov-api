@@ -6,6 +6,7 @@ const helmet = require('helmet');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const limiter = require('./utils/limiter');
 const errorHandler = require('./middlewares/errorHandler');
+const routes = require('./routes/index');
 
 const { PORT = 3000, MONGODB_URL, NODE_ENV } = process.env;
 const MONGODB_URL_DEV = require('./utils/constants');
@@ -23,6 +24,9 @@ app.use(requestLogger);
 
 // лимит запросов
 app.use(limiter);
+
+// все роуты приложения
+app.use(routes);
 
 // подключаем логгер ошибок
 app.use(errorLogger);
