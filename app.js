@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const helmet = require('helmet');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const limiter = require('./utils/limiter');
+const errorHandler = require('./middlewares/errorHandler');
 
 const { PORT = 3000, MONGODB_URL, NODE_ENV } = process.env;
 const MONGODB_URL_DEV = require('./utils/constants');
@@ -25,6 +26,9 @@ app.use(limiter);
 
 // подключаем логгер ошибок
 app.use(errorLogger);
+
+// обработка ошибок
+app.use(errorHandler);
 
 async function main() {
   await mongoose.connect(NODE_ENV === 'production' ? MONGODB_URL : MONGODB_URL_DEV);
