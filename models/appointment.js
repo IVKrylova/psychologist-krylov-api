@@ -23,6 +23,13 @@ const appointmentSchema = new mongoose.Schema({
   },
   type: {
     type: String,
+    required: true,
+  },
+  // время жизни - месяц в секундах
+  expire_at: {
+    type: Date,
+    default: Date.now,
+    expires: 60 * 60 * 24 * 31,
   },
 });
 

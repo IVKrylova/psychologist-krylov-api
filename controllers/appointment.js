@@ -11,7 +11,34 @@ module.exports.sendRequest = (req, res, next) => {
   };
 
   sendMail(options)
-    .then((info) => info)
+    .then((info) => res.send(info))
+    .catch((err) => {
+      if (err.statusCode === 404 || err.name === 'ValidationError') {
+        next(new BadRequestError(BAD_REQUEST_MESSAGE));
+      } else {
+        next(err);
+      }
+    });
+};
+
+// отправка сообщения из календаря на почту
+module.exports.sendFromCalendar = (req, res, next) => {
+  const {
+    day,
+    month,
+    time,
+    name,
+    phone,
+    type,
+  } = req.body;
+  const options = {
+    subject: 'Запись на прием из календаря',
+    text: `Имя: ${name}, телефон: ${phone}, формат консультации: ${type}
+      дата: ${day} ${month}, время: ${time}`,
+  };
+
+  sendMail(options)
+    .then((info) => res.send(info))
     .catch((err) => {
       if (err.statusCode === 404 || err.name === 'ValidationError') {
         next(new BadRequestError(BAD_REQUEST_MESSAGE));

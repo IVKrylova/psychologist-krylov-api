@@ -1,10 +1,14 @@
 const router = require('express').Router();
 const { NotFoundError } = require('../utils/NotFoundError');
 const { WRONG_PATCH_MESSAGE } = require('../utils/constants');
-const { sendRequest } = require('../controllers/appointment');
+const calendarRoutes = require('./calendar');
+const nodemailerRoutes = require('./appointment');
 
-// отправка сообщения из формы на почту
-router.post('/request', sendRequest);
+// роуты для отправки сообщений о записи на почту
+router.use(nodemailerRoutes);
+
+// роуты для работы с календарем
+router.use(calendarRoutes);
 
 // oбработка неправильного пути
 router.use((req, res, next) => {
