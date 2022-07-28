@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const { errors } = require('celebrate');
 const helmet = require('helmet');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const limiter = require('./utils/limiter');
@@ -30,6 +31,9 @@ app.use(routes);
 
 // подключаем логгер ошибок
 app.use(errorLogger);
+
+// обработчик ошибок celebrate
+app.use(errors());
 
 // обработка ошибок
 app.use(errorHandler);
