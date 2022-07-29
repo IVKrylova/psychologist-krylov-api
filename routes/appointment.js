@@ -6,6 +6,7 @@ const { sendRequestValidation, signUpValidation } = require('../utils/celebrateV
 // отправка сообщения из формы на почту
 router.post('/request', celebrate(sendRequestValidation), sendRequest);
 
+// отправка сообщения из календаря на почту
 router.post('/signup', celebrate(signUpValidation), sendFromCalendar);
 
 module.exports = router;
