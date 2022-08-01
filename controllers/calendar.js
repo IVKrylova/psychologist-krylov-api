@@ -35,9 +35,12 @@ module.exports.signup = (req, res, next) => {
 module.exports.getAppointments = (req, res, next) => {
   Appointment.find()
     .then((data) => {
-      const { time, day, month } = data;
+      const depersonalizedData = data.map((appointment) => {
+        const { month, day, time } = appointment;
+        return { month, day, time };
+      });
 
-      res.send({ month, day, time });
+      res.send(depersonalizedData);
     })
     .catch(next);
 };
