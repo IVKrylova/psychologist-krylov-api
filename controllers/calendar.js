@@ -34,6 +34,10 @@ module.exports.signup = (req, res, next) => {
 // загрузка данных в календарь
 module.exports.getAppointments = (req, res, next) => {
   Appointment.find()
-    .then((data) => res.send(data))
+    .then((data) => {
+      const { time, day, month } = data;
+
+      res.send({ month, day, time });
+    })
     .catch(next);
 };
