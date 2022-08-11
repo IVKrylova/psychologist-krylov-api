@@ -16,10 +16,16 @@ const appointmentSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
+    maxlength: 40,
+    minlength: 2,
+    pattern: '[A-Za-zА-Яа-яёЁ]+',
   },
   phone: {
     type: String,
     required: true,
+    pattern: '[0-9]+',
+    minlength: 9,
+    maxlength: 12,
   },
   type: {
     type: String,
