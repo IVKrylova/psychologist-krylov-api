@@ -10,7 +10,7 @@ const errorHandler = require('./middlewares/errorHandler');
 const routes = require('./routes/index');
 const corsHandler = require('./middlewares/corsHandler');
 
-const { PORT = 3000, MONGODB_URL, NODE_ENV } = process.env;
+const { PORT = 3001, MONGODB_URL, NODE_ENV } = process.env;
 const { MONGODB_URL_DEV } = require('./utils/constants');
 
 const app = express();
