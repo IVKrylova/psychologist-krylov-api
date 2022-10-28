@@ -23,9 +23,8 @@ const appointmentSchema = new mongoose.Schema({
   phone: {
     type: String,
     required: true,
-    pattern: '[0-9]+',
     minlength: 9,
-    maxlength: 12,
+    maxlength: 20,
   },
   type: {
     type: String,
