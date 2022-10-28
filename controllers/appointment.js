@@ -2,7 +2,6 @@ const { sendMail } = require('../utils/nodemailer');
 const { BAD_REQUEST_MESSAGE } = require('../utils/constants');
 const { BadRequestError } = require('../utils/BadRequestError');
 
-// отправка сообщения из формы на почту
 module.exports.sendRequest = (req, res, next) => {
   const { name, phone, type } = req.body;
   const options = {
@@ -21,7 +20,6 @@ module.exports.sendRequest = (req, res, next) => {
     });
 };
 
-// отправка сообщения из календаря на почту
 module.exports.sendFromCalendar = (req, res, next) => {
   const {
     day,

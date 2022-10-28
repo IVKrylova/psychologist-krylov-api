@@ -2,7 +2,6 @@ const Appointment = require('../models/appointment');
 const { BAD_REQUEST_MESSAGE } = require('../utils/constants');
 const { BadRequestError } = require('../utils/BadRequestError');
 
-// добавление записи через календарь
 module.exports.signup = (req, res, next) => {
   const {
     day,
@@ -31,7 +30,6 @@ module.exports.signup = (req, res, next) => {
     });
 };
 
-// загрузка данных в календарь
 module.exports.getAppointments = (req, res, next) => {
   Appointment.find()
     .then((data) => {
